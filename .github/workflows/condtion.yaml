@@ -1,5 +1,5 @@
 # This is basis workflwo for nodejs, it will run on push and pull request on master branc
-name: Channing the jobs with conditions
+name: Channing the jobs with conditions- part1
 on:
   workflow_dispatch:
     inputs:
@@ -34,3 +34,9 @@ jobs:
     steps:
       - name: Output of the job 3
         run: echo "Hello from Job3"
+  job-4:
+    name: Job 4
+    runs-on: ubuntu-latest
+    steps:
+      - name: Output of the job 4
+        run: echo "Hello from Job4"
