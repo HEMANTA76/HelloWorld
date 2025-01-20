@@ -37,6 +37,7 @@ jobs:
   job-4:
     name: Job 4
     runs-on: ubuntu-latest
+    if: awlays()
     steps:
       - name: Output of the job 4
         run: echo "Hello from Job4"
