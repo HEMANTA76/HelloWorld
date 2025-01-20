@@ -1,0 +1,37 @@
+# This is basis workflwo for nodejs, it will run on push and pull request on master branc
+name: Basic workflow
+on:
+  workflow_dispatch:
+    inputs:
+      name:
+        description: "Name of the person to greet"
+        required: true
+        default: "Mona the Octocat"
+        type: string
+      city:
+        description: "City of the person to greet"
+        required: true
+        default: "San Francisco"
+        type: choice
+        options:
+          - "San Francisco"
+          - "Amsterdam"
+          - "London"
+          - "New York"
+      fav-color-blue:
+        description: "Is Blue your favorite color?"
+        required: true
+        type: boolean
+jobs:
+  #This workflow contains a single job that runs on the latest version of ubuntu
+  greet:
+    #Type of runner that the job will run on
+    runs-on: ubuntu-latest
+    #steps represent a sequence of tasks that will be executed as part of the greet job
+    steps:
+      #it runs the command using the runners shell and get the context from the github object
+      - name: Send Greeting
+        run: |
+          echo "Hello ${{ github.event.inputs.name }}"
+          echo "from ${{ github.event.inputs.city }}" 
+          echo "from ${{ github.event.inputs.fav-color-blue }}"
