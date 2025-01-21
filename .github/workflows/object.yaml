@@ -25,3 +25,22 @@ jobs:
         env:
           GITHUB_CONTEXT: ${{ toJson(github) }}
         run: echo "$GITHUB_CONTEXT"
+  #Add another job to the workflow
+  job2:
+    runs-on: ubuntu-latest
+    outputs:
+      output1: ${{ steps.step1.outputs.step1Value }}
+      output2: ${{ steps.step2.outputs.step2Value }}
+    steps:
+      - name: step1
+        id: step1
+        run: echo "step1Value=hello" >> $GITHUB_OUTPUT
+      - name: step2
+        id: step2
+        run: echo "step2Value=world" >> $GITHUB_OUTPUT
+  job3:
+    runs-on: ubuntu-latest
+    needs: [job2]
+    steps:
+      - name: Dump job2 outputs
+        run: echo "${{ toJson(needs.job2.outputs) }}"
