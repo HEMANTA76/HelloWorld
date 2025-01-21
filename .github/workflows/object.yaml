@@ -1,0 +1,27 @@
+name: Varibale and context
+#Control when the action will run. Workflow runs when someones manually triggers it thru UI
+#or API
+on:
+  workflow_dispatch:
+    inputs:
+      name:
+        description: "Person to greet"
+        required: true
+        default: "World"
+
+env:
+  VAR1: myWorkflowvar1
+  VAR2: myWorkflowvar2
+  VAR3: myWorkflowvar3
+
+#A workflow is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  job1:
+    #The type of runner that the job will run on
+    runs-on: ubuntu-latest
+    #Steps represent a sequence of tasks that will be executed
+    steps:
+      - name: Dump github context
+        env:
+          GITHUB_CONTEXT: ${{ toJson(github) }}
+        run: echo "$GITHUB_CONTEXT"
